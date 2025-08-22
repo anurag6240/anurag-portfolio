@@ -1,6 +1,6 @@
 # Anurag Kumar — Portfolio
 
-A personal portfolio website built with Next.js, Tailwind CSS and Framer Motion. Shows projects, tools & technologies, animated background and a custom cursor. Includes project cards with GitHub / Live links, and an animated background with a runtime quality toggle.
+A personal portfolio website built with Next.js, Tailwind CSS and Framer Motion. Shows projects, tools & technologies, animated background and a custom cursor. Includes project cards with GitHub / Live links, and an animated background.
 
 ## Features
 - Projects section with GitHub / Live Preview actions
