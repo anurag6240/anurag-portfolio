@@ -1,0 +1,7 @@
+<!-- Supabase logo -->
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <rect width="40" height="40" rx="20" fill="#3ECF8E"/>
+    <path d="M20 10l8 14H12l8-14zm0 6.5L15.5 24h9L20 16.5z" fill="#fff"/>
+  </g>
+</svg>

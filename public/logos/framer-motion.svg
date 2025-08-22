@@ -1,0 +1,5 @@
+<!-- Framer Motion logo -->
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="20" fill="#0055FF"/>
+  <path d="M12 12h16v8H20l8 8H12v-8h8l-8-8z" fill="#fff"/>
+</svg>
