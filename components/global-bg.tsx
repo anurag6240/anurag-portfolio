@@ -1,23 +1,42 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
+
+type Particle = {
+  left: string
+  top: string
+  animationDelay: string
+  animationDuration: string
+}
 
 export function GlobalBackground() {
+  const [particles, setParticles] = useState<Particle[]>([])
+
+  useEffect(() => {
+    const generated: Particle[] = Array.from({ length: 20 }).map(() => ({
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 10}s`,
+      animationDuration: `${15 + Math.random() * 10}s`,
+    }))
+    setParticles(generated)
+  }, [])
+
   return (
-  <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       <div className="absolute inset-0 bg-gradient-to-br from-background via-muted/20 to-background" />
 
       {/* Animated floating particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((p, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-primary/20 rounded-full animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${15 + Math.random() * 10}s`,
+              left: p.left,
+              top: p.top,
+              animationDelay: p.animationDelay,
+              animationDuration: p.animationDuration,
             }}
           />
         ))}

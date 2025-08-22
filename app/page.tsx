@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { CustomCursor } from "@/components/custom-cursor"
+import CustomCursor from "@/components/custom-cursor"
 import { HeroSection } from "@/components/sections/hero-section"
 import { AboutSection } from "@/components/sections/about-section"
 import { SkillsSection } from "@/components/sections/skills-section"

@@ -4,7 +4,7 @@ import { Space_Grotesk } from "next/font/google"
 import { DM_Sans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AnimatedBackground } from "@/components/animated-bg"
-import { CustomCursor } from "@/components/custom-cursor"
+import CustomCursor from "@/components/custom-cursor"
 import { GlobalBackground } from "@/components/global-bg"
 import "./globals.css"
 
