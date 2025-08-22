@@ -4,7 +4,7 @@ import { motion, easeInOut } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 
-import { Download, MapPin, GraduationCap, Code, Calendar } from "lucide-react"
+import { MapPin, GraduationCap, Code, Calendar } from "lucide-react"
 
 export function AboutSection() {
   const containerVariants = {
@@ -52,7 +52,7 @@ export function AboutSection() {
     {
       icon: Calendar,
       label: "Availability",
-      value: "Fall '25 contracts",
+      value: "Available",
       color: "text-neon-blue",
     },
   ]
@@ -98,18 +98,7 @@ export function AboutSection() {
                 extensions.
               </p>
 
-              {/* Resume Download */}
-              <motion.div variants={itemVariants} className="pt-4">
-                <Button
-                  size="lg"
-                  data-cursor-hover
-                  onClick={handleResumeDownload}
-                  className="px-8 py-4 bg-neon-purple text-white hover:bg-neon-purple/90 hover:text-black font-semibold transition-all duration-300 hover:shadow-[0_0_24px_8px_rgba(186,0,255,0.6)]"
-                >
-                  <Download className="mr-2 w-5 h-5" />
-                  Download Resume
-                </Button>
-              </motion.div>
+              
             </motion.div>
 
             {/* Quick Facts Grid */}
