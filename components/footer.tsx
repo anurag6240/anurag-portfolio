@@ -167,7 +167,7 @@ export function Footer() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
-              className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-neon-cyan to-neon-purple text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg"
+              className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-neon-cyan to-neon-purple text-foreground px-4 py-2 rounded-full text-sm font-medium shadow-lg"
             >
               🎉 Surprise! Check the console! 🎉
             </motion.div>

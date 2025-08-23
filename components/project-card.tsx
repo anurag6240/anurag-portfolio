@@ -61,7 +61,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.2 }}
       data-cursor-hover
     >
-      <Card className="overflow-hidden glass-morphism visible-border hover:strong-border transition-all duration-500 h-full">
+  <Card className="overflow-hidden glass-morphism visible-border hover:strong-border transition-all duration-500 h-full">
         {/* Project Image */}
         <div className="relative h-48 overflow-hidden">
           <Image
@@ -105,10 +105,10 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
   {/* Project Content */}
-  <div className="p-6 pt-8 md:pt-6">
+          <div className="p-6 pt-8 md:pt-6">
           <div className="mb-4">
             <h3 className="text-xl font-bold text-foreground mb-1">{project.title}</h3>
-            <p className={`text-sm font-medium text-${project.color}`}>{project.subtitle}</p>
+            <p className={`text-sm font-medium ${project.color.replace('bg-','text-')}`}>{project.subtitle}</p>
           </div>
 
           <p className="text-muted-foreground text-sm leading-relaxed mb-4">{project.description}</p>

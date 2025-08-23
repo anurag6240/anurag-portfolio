@@ -37,9 +37,9 @@ export function AnimatedBackground() {
     // Map quality to rendering parameters
     const settings = {
       off: { lines: 0, targetFPS: 0, alphaScale: 0, maxShadowMult: 0 },
-      low: { lines: 6, targetFPS: 15, alphaScale: 0.3, maxShadowMult: 2 },
-      med: { lines: 12, targetFPS: 30, alphaScale: 0.5, maxShadowMult: 3 },
-      high: { lines: 30, targetFPS: 45, alphaScale: 0.8, maxShadowMult: 4 },
+      low: { lines: 4, targetFPS: 12, alphaScale: 0.22, maxShadowMult: 1.5 },
+      med: { lines: 8, targetFPS: 22, alphaScale: 0.32, maxShadowMult: 2 },
+      high: { lines: 18, targetFPS: 32, alphaScale: 0.45, maxShadowMult: 2.5 },
     }[effectiveQuality]
 
     // If disabled, don't start the heavy loop
@@ -65,7 +65,7 @@ export function AnimatedBackground() {
       speed: 0.4 + Math.random() * 1.8,
       angle: Math.random() * Math.PI * 2,
       width: 1 + Math.random() * 3,
-      opacity: 0.04 + Math.random() * 0.18,
+  opacity: 0.10 + Math.random() * 0.18,
       color: `hsl(${170 + Math.random() * 80}, 85%, ${40 + Math.random() * 25}%)`,
     }))
 
@@ -74,8 +74,17 @@ export function AnimatedBackground() {
     let lastFrameTime = performance.now()
     let rafId: number | null = null
 
+
+    // Scroll pause/throttle logic
+    let isScrolling = false
+    let scrollTimeout: number | null = null
+
     function draw(now?: number) {
       if (!ctx) return
+      if (isScrolling) {
+        rafId = requestAnimationFrame(draw)
+        return
+      }
       const ts = now ?? performance.now()
       const delta = ts - lastFrameTime
       if (delta < frameDuration) {
@@ -117,6 +126,16 @@ export function AnimatedBackground() {
 
     rafId = requestAnimationFrame(draw)
 
+    // Pause animation while scrolling
+    const handleScroll = () => {
+      isScrolling = true
+      if (scrollTimeout) window.clearTimeout(scrollTimeout)
+      scrollTimeout = window.setTimeout(() => {
+        isScrolling = false
+      }, 120)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
     const handleResize = () => {
       width = window.innerWidth
       height = window.innerHeight
@@ -136,6 +155,7 @@ export function AnimatedBackground() {
     return () => {
       window.removeEventListener("resize", handleResize)
       document.removeEventListener("visibilitychange", handleVisibility)
+      window.removeEventListener("scroll", handleScroll)
       if (typeof rafId === "number" && rafId !== null) cancelAnimationFrame(rafId)
     }
   }, [])
@@ -144,14 +164,14 @@ export function AnimatedBackground() {
     <>
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none z-[5]"
+        className="fixed inset-0 w-full h-full pointer-events-none z-[0]"
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           width: "100vw",
           height: "100vh",
-          zIndex: 5,
+          zIndex: 0,
         }}
       />
       {/* Quality control placeholder: users can toggle via localStorage key `animatedBgQuality` = off|low|med|high */}

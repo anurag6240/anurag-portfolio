@@ -90,7 +90,7 @@ export function SkillsSection() {
           {/* Section Header */}
           <motion.div variants={itemVariants} className="text-center mb-16">
             <motion.h2
-              className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent"
+              className="text-4xl md:text-6xl font-bold mb-6 text-foreground"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
@@ -99,7 +99,7 @@ export function SkillsSection() {
                 Expertise
               </span>
             </motion.h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Crafting digital experiences with modern technologies and best practices
             </p>
           </motion.div>
@@ -110,11 +110,11 @@ export function SkillsSection() {
               <motion.div
                 key={category.title}
                 variants={itemVariants}
-                className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="bg-card/80 backdrop-blur-sm rounded-2xl p-8 border border-border/50 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex items-center gap-3 mb-8">
                   <span className="text-3xl">{category.icon}</span>
-                  <h3 className="text-2xl font-bold text-gray-800">{category.title}</h3>
+                  <h3 className="text-2xl font-bold text-foreground">{category.title}</h3>
                 </div>
 
                 <div className="space-y-6">
@@ -129,24 +129,24 @@ export function SkillsSection() {
                     >
                       <div className="flex justify-between items-center mb-3">
                         <div className="flex items-center gap-3">
-                          <span className="font-semibold text-gray-800 text-lg">{skill.name}</span>
+                          <span className="font-semibold text-foreground text-lg">{skill.name}</span>
                           {hoveredSkill === skill.name && (
                             <motion.div
                               initial={{ opacity: 0, scale: 0.8 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              className="flex gap-2 text-sm text-gray-600"
+                              className="flex gap-2 text-sm text-muted-foreground"
                             >
-                              <span className="bg-gray-100 px-2 py-1 rounded-full">{skill.experience}</span>
-                              <span className="bg-gray-100 px-2 py-1 rounded-full">{skill.projects} projects</span>
+                              <span className="bg-background/10 px-2 py-1 rounded-full">{skill.experience}</span>
+                              <span className="bg-background/10 px-2 py-1 rounded-full">{skill.projects} projects</span>
                             </motion.div>
                           )}
                         </div>
-                        <span className="text-sm font-medium text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                        <span className="text-sm font-medium text-muted-foreground bg-background/10 px-3 py-1 rounded-full">
                           {skill.level}%
                         </span>
                       </div>
 
-                      <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+                      <div className="h-3 bg-background/10 rounded-full overflow-hidden">
                         <motion.div
                           className={`h-full bg-gradient-to-r ${getSkillColor(skill.level)} rounded-full relative`}
                           initial={{ width: 0 }}
@@ -157,7 +157,7 @@ export function SkillsSection() {
                           }}
                           viewport={{ once: true }}
                         >
-                          <div className="absolute inset-0 bg-white/20 rounded-full animate-pulse" />
+                          <div className="absolute inset-0 bg-background/20 rounded-full animate-pulse" />
                         </motion.div>
                       </div>
                     </motion.div>
@@ -169,7 +169,7 @@ export function SkillsSection() {
 
           {/* Tools & Technologies */}
           <motion.div variants={itemVariants} className="text-center">
-            <h3 className="text-3xl font-bold mb-8 text-gray-800">
+            <h3 className="text-3xl font-bold mb-8 text-foreground">
               Tools &{" "}
               <span className="bg-gradient-to-r from-purple-500 to-pink-600 bg-clip-text text-transparent">
                 Technologies
@@ -189,16 +189,16 @@ export function SkillsSection() {
                   whileTap={{ scale: 0.95 }}
                   className="group cursor-pointer"
                 >
-                  <Card className="p-6 bg-white/90 backdrop-blur-sm border border-gray-200/50 hover:border-gray-300 transition-all duration-300 h-full">
+      <Card className="p-6 bg-card/90 backdrop-blur-sm border border-border/50 hover:border-border/70 transition-all duration-300 h-full">
                     <div className="flex flex-col items-center text-center space-y-3">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-shadow duration-300">
                         <img src={toolLogos[tool.key as keyof typeof toolLogos]} alt={`${tool.name} logo`} className="w-10 h-10 object-contain" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">
+        <h4 className="font-semibold text-foreground group-hover:text-foreground/80 transition-colors">
                           {tool.name}
                         </h4>
-                        <p className="text-xs text-gray-500 mt-1">{tool.category}</p>
+        <p className="text-xs text-muted-foreground mt-1">{tool.category}</p>
                       </div>
                     </div>
                   </Card>
