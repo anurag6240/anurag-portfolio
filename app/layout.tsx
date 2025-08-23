@@ -3,9 +3,11 @@ import type { Metadata } from "next"
 import { Space_Grotesk } from "next/font/google"
 import { DM_Sans } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
+import AIAssistant from "@/components/ai-assistant"
 import { AnimatedBackground } from "@/components/animated-bg"
 import CustomCursor from "@/components/custom-cursor"
 import { GlobalBackground } from "@/components/global-bg"
+import ThemeToggle from "@/components/theme-toggle"
 import "./globals.css"
 
 const spaceGrotesk = Space_Grotesk({
@@ -58,8 +60,23 @@ html {
   --font-mono: ${dmSans.variable};
 }
         `}</style>
+        <script dangerouslySetInnerHTML={{ __html: `(${String(() => {
+          try {
+            const theme = localStorage.getItem('theme')
+            if (theme === 'dark') document.documentElement.classList.add('dark')
+            else if (theme === 'light') document.documentElement.classList.remove('dark')
+            else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark')
+          } catch (e) {
+            // ignore
+          }
+        })})()` }} />
       </head>
       <body className={`${spaceGrotesk.variable} ${dmSans.variable} antialiased`}>
+  <script
+    dangerouslySetInnerHTML={{
+      __html: `try{const cs=getComputedStyle(document.documentElement);const sample=document.querySelector('[data-theme-sample]')||document.body;console.log('THEME DEBUG -> html.class:',document.documentElement.className);console.log('THEME DEBUG -> --color-background:',cs.getPropertyValue('--color-background'));console.log('THEME DEBUG -> --color-foreground:',cs.getPropertyValue('--color-foreground'));console.log('THEME DEBUG -> sample element:', sample.tagName, sample.className);const sc=getComputedStyle(sample);console.log('THEME DEBUG -> sample color:', sc.color);console.log('THEME DEBUG -> sample background:', sc.backgroundColor);}catch(e){console.log('theme-debug-error',e)}`,
+    }}
+  />
         {/* Canvas-based animated background (subtle neon lines) */}
         <AnimatedBackground />
 
@@ -68,8 +85,10 @@ html {
 
         <CustomCursor />
 
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true} disableTransitionOnChange>
           {children}
+          <ThemeToggle />
+          <AIAssistant />
         </ThemeProvider>
       </body>
     </html>

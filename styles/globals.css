@@ -1,7 +1,9 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@custom-variant dark (&:is(.dark *));
+/* keep custom animation utilities from the plugin */
+@import 'tw-animate-css';
 
 :root {
   --background: oklch(1 0 0);
@@ -39,7 +41,7 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
+html.dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
@@ -74,7 +76,7 @@
   --sidebar-ring: oklch(0.439 0 0);
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -113,13 +115,53 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* RGB fallbacks used by Tailwind when generating opacity variants (e.g. bg-background/80).
+   These hold plain "R G B" triplets so Tailwind can emit: rgb(var(--color-*-rgb) / <alpha>) */
+:root {
+  --color-background-rgb: 248 247 245; /* light off-white */
+  --color-foreground-rgb: 15 23 35; /* dark text */
+  --color-card-rgb: 255 255 255;
+  --color-card-foreground-rgb: 20 24 28;
+  --color-popover-rgb: 255 255 255;
+  --color-popover-foreground-rgb: 20 24 28;
+  --color-primary-rgb: 14 116 255;
+  --color-primary-foreground-rgb: 255 255 255;
+  --color-muted-rgb: 244 244 245;
+  --color-muted-foreground-rgb: 99 102 106;
+  --color-accent-rgb: 244 244 245;
+  --color-accent-foreground-rgb: 20 24 28;
+  --color-destructive-rgb: 220 38 38;
+  --color-destructive-foreground-rgb: 255 255 255;
+  --color-border-rgb: 229 231 235;
+  --color-input-rgb: 245 245 246;
+  --color-ring-rgb: 99 102 241;
+}
+
+html.dark {
+  --color-background-rgb: 20 24 28; /* dark bg */
+  --color-foreground-rgb: 230 235 240; /* light text */
+  --color-card-rgb: 28 30 33;
+  --color-card-foreground-rgb: 230 235 240;
+  --color-popover-rgb: 28 30 33;
+  --color-popover-foreground-rgb: 230 235 240;
+  --color-primary-rgb: 130 100 240;
+  --color-primary-foreground-rgb: 20 24 28;
+  --color-muted-rgb: 36 40 44;
+  --color-muted-foreground-rgb: 156 163 175;
+  --color-accent-rgb: 36 40 44;
+  --color-accent-foreground-rgb: 230 235 240;
+  --color-destructive-rgb: 220 38 38;
+  --color-destructive-foreground-rgb: 255 255 255;
+  --color-border-rgb: 44 46 50;
+  --color-input-rgb: 34 37 41;
+  --color-ring-rgb: 99 102 241;
+}
+
+
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply text-foreground;
-    background: transparent !important;
-    box-shadow: none !important;
+  html, body {
+    color: var(--color-foreground);
+    background: var(--color-background) !important;
+    transition: background-color 240ms ease, color 240ms ease;
   }
 }

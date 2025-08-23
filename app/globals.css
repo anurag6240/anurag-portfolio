@@ -2,8 +2,8 @@
 @import "tw-animate-css";
 
 html {
-  /* Force modern light theme as default */
-  color-scheme: light;
+  /* Allow both color schemes so dark mode can render properly when toggled */
+  color-scheme: light dark;
 }
 
 :root {
@@ -49,6 +49,83 @@ html {
   --neon-pink: oklch(0.65 0.2 350);
 }
 
+/* Dark mode overrides when html has the .dark class */
+html.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* RGB fallbacks for opacity-aware Tailwind utilities */
+:root {
+  --color-background-rgb: 248 247 245;
+  --color-foreground-rgb: 15 23 35;
+  --color-card-rgb: 255 255 255;
+  --color-card-foreground-rgb: 20 24 28;
+  --color-popover-rgb: 255 255 255;
+  --color-popover-foreground-rgb: 20 24 28;
+  --color-primary-rgb: 14 116 255;
+  --color-primary-foreground-rgb: 255 255 255;
+  --color-muted-rgb: 244 244 245;
+  --color-muted-foreground-rgb: 99 102 106;
+  --color-accent-rgb: 244 244 245;
+  --color-accent-foreground-rgb: 20 24 28;
+  --color-destructive-rgb: 220 38 38;
+  --color-destructive-foreground-rgb: 255 255 255;
+  --color-border-rgb: 229 231 235;
+  --color-input-rgb: 245 245 246;
+  --color-ring-rgb: 99 102 241;
+}
+
+html.dark {
+  --color-background-rgb: 20 24 28;
+  --color-foreground-rgb: 230 235 240;
+  --color-card-rgb: 28 30 33;
+  --color-card-foreground-rgb: 230 235 240;
+  --color-popover-rgb: 28 30 33;
+  --color-popover-foreground-rgb: 230 235 240;
+  --color-primary-rgb: 130 100 240;
+  --color-primary-foreground-rgb: 20 24 28;
+  --color-muted-rgb: 36 40 44;
+  --color-muted-foreground-rgb: 156 163 175;
+  --color-accent-rgb: 36 40 44;
+  --color-accent-foreground-rgb: 230 235 240;
+  --color-destructive-rgb: 220 38 38;
+  --color-destructive-foreground-rgb: 255 255 255;
+  --color-border-rgb: 44 46 50;
+  --color-input-rgb: 34 37 41;
+  --color-ring-rgb: 99 102 241;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -93,12 +170,9 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
-    /* Added subtle animated background for light theme */
-    background: radial-gradient(circle at 20% 80%, oklch(0.95 0.05 200) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, oklch(0.95 0.05 280) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, oklch(0.96 0.03 250) 0%, transparent 50%), var(--background);
-    background-attachment: fixed;
+    /* Force body colors from the RGB CSS variables so Tailwind opacity helpers and html.dark work reliably */
+    color: rgb(var(--color-foreground-rgb)) !important;
+    background-color: rgb(var(--color-background-rgb)) !important;
   }
 }
 
